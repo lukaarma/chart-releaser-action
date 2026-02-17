@@ -327,6 +327,11 @@ package_chart() {
 }
 
 release_charts() {
+  if [[ -n "$skip_upload" ]]; then
+    echo "Skipping charts upload..."
+    return
+  fi
+  
   local args=(-o "$owner" -r "$repo" -c "$(git rev-parse HEAD)")
   if [[ -n "$config" ]]; then
     args+=(--config "$config")
